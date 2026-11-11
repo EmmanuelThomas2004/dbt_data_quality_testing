@@ -1,0 +1,15 @@
+
+unit_tests:
+  - name: test_order_discount
+    model: int_order_discount
+
+    given:
+      - input: ref('stg_orders')
+        rows:
+          - {ORDER_ID: 101, TOTAL_AMOUNT: 1000}
+          - {ORDER_ID: 102, TOTAL_AMOUNT: 2000}
+
+    expect:
+      rows:
+        - {ORDER_ID: 101, TOTAL_AMOUNT: 1000, DISCOUNT_AMOUNT: 100}
+        - {ORDER_ID: 102, TOTAL_AMOUNT: 2000, DISCOUNT_AMOUNT: 200}
